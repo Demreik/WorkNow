@@ -101,42 +101,28 @@ $('#reset').on('click', function () {
 
 //Кнопка add/remove
 
-function change1() 
+var addedItems =[];
+
+function addRemoveCartItem(btn) 
 {
-    const counterElem = document.getElementById('cart-count')
-    var elem = document.getElementById("btnCard1");
-    if (elem.innerHTML=="Remove") elem.innerHTML = "Add", 
-    count = +counterElem.innerHTML,
-    counterElem.innerHTML = count-1; 
-    else elem.innerHTML = "Remove", 
-    count = +counterElem.innerHTML,
-    counterElem.innerHTML = count+1;
+    const counterElem = document.getElementById('cart-count');
+    
+    if(btn.innerHTML=="Add"){
+      btn.innerHTML = "Remove"
+      addedItems.push(btn.id);
+      counterElem.innerHTML = addedItems.length;     
+    }
+    else{
+      btn.innerHTML = "Add"
+      const index = addedItems.indexOf(btn.id);
+      addedItems.splice(index, 1);
+      counterElem.innerHTML = addedItems.length;
+    }
 }
 
-function change2() 
+var exampleModal = document.getElementById('exampleModal')
+exampleModal.addEventListener('show.bs.modal', function (event) 
 {
-    const counterElem = document.getElementById('cart-count')
-    var elem = document.getElementById("btnCard2");
-    if (elem.innerHTML=="Remove") elem.innerHTML = "Add", 
-    count = +counterElem.innerHTML,
-    counterElem.innerHTML = count-1; 
-    else elem.innerHTML = "Remove", 
-    count = +counterElem.innerHTML,
-    counterElem.innerHTML = count+1;
-}
-
-function change3() 
-{   
-    const counterElem = document.getElementById('cart-count')
-    var elem = document.getElementById("btnCard3");
-    if (elem.innerHTML=="Remove") elem.innerHTML = "Add", 
-    count = +counterElem.innerHTML,
-    counterElem.innerHTML = count-1; 
-    else elem.innerHTML = "Remove", 
-    count = +counterElem.innerHTML,
-    counterElem.innerHTML = count+1;
-}
-
-
-
-
+  const counterElem = document.getElementById('modal-cart-count');
+  counterElem.innerHTML = addedItems.length <= 0 ? "" : addedItems.length;
+})
