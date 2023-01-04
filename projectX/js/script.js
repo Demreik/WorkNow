@@ -126,3 +126,36 @@ exampleModal.addEventListener('show.bs.modal', function (event)
   const counterElem = document.getElementById('modal-cart-count');
   counterElem.innerHTML = addedItems.length <= 0 ? "" : addedItems.length;
 })
+
+const modalBody = document.querySelector('.modal-body')
+
+window.addEventListener('click', function (event) {
+  if (event.target.innerHTML === "Remove") {
+
+    const card = event.target.closest('.card')
+    
+    
+    const cardInfo = {
+      id: card.id,
+      imgSrc: card.querySelector('.card-img-top').getAttribute('src'),
+      title: card.querySelector('.card-title').innerText,
+
+    }
+    
+    const cardItemHTML = ` <div class="col-md-6 col-xl-3">
+    <div class="card text-center" id="${cardInfo.id}">
+      <img class="card-img-top vh-50" src="${cardInfo.imgSrc}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">${cardInfo.title}</h5>
+        <a href="#" id="btnCard2" class="btn btn-outline-dark" role="button" data-bs-toggle="button">Remove</a>
+       </div>
+    </div>
+  </div>`
+
+  modalBody.insertAdjacentHTML('beforeend', cardItemHTML)
+  }
+
+  else {
+    event.target.closest('.card').romove()
+  }
+})
