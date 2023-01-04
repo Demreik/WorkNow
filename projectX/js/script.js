@@ -88,18 +88,12 @@ form.addEventListener('submit', function(event){
       }, false)
     })
   })();
-/*
-  $('#add').on('click', function () {
-    $(this).button('complete');
-});
-$('#reset').on('click', function () {
-    $('#download').button('reset');
-});
-*/
+
 
 
 
 //Кнопка add/remove
+const modalBody = document.querySelector('.modal-body')
 
 var addedItems =[];
 
@@ -127,7 +121,8 @@ exampleModal.addEventListener('show.bs.modal', function (event)
   counterElem.innerHTML = addedItems.length <= 0 ? "" : addedItems.length;
 })
 
-const modalBody = document.querySelector('.modal-body')
+//Добавление в корзину и удаленние из нее
+
 
 window.addEventListener('click', function (event) {
   if (event.target.innerHTML === "Remove") {
@@ -147,15 +142,15 @@ window.addEventListener('click', function (event) {
       <img class="card-img-top vh-50" src="${cardInfo.imgSrc}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">${cardInfo.title}</h5>
-        <a href="#" id="btnCard2" class="btn btn-outline-dark" role="button" data-bs-toggle="button">Remove</a>
+        <a href="#" id="btnCard2" class="btn btn-outline-dark" role="button" data-bs-toggle="button" onclick="addRemoveCartItem(this)">Remove</a>
        </div>
     </div>
   </div>`
 
   modalBody.insertAdjacentHTML('beforeend', cardItemHTML)
   }
-
-  else {
-    event.target.closest('.card').romove()
+//это удалеят из корзины, но не удалаяет при нажатии вне модала 
+  if (event.target.innerHTML === "Add" && event.target.closest('.modal-body')) {
+    event.target.closest('.card').remove()
   }
 })
