@@ -137,14 +137,14 @@ window.addEventListener('click', function (event) {
 
     }
     
-    const cardItemHTML = ` <div class="col-md-6 col-xl-3">
-    <div class="card text-center" id="${cardInfo.id}">
+    const cardItemHTML = ` 
+    <div class="card text-center col-md-6 col-xl-3" id="${cardInfo.id}">
       <img class="card-img-top vh-50" src="${cardInfo.imgSrc}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">${cardInfo.title}</h5>
         <a href="#" id="btnCard2" class="btn btn-outline-dark" role="button" data-bs-toggle="button" onclick="addRemoveCartItem(this)">Remove</a>
        </div>
-    </div>
+    
   </div>`
 
   modalBody.insertAdjacentHTML('beforeend', cardItemHTML)
